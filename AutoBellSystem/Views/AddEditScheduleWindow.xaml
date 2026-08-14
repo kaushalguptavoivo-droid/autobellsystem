@@ -1,0 +1,94 @@
+<Window x:Class="AutoBellSystem.Views.AddEditScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Bell Period" Height="480" Width="420"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Name -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Period Name" FontWeight="SemiBold"/>
+            <TextBox x:Name="NameBox" Margin="0,4,0,0" Text="Period 1"/>
+        </StackPanel>
+
+        <!-- Time -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <StackPanel>
+                <TextBlock Text="Hour" FontWeight="SemiBold"/>
+                <ComboBox x:Name="HourBox" Width="70" Margin="0,4,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="10,0,0,0">
+                <TextBlock Text="Minute" FontWeight="SemiBold"/>
+                <ComboBox x:Name="MinuteBox" Width="70" Margin="0,4,0,0"/>
+            </StackPanel>
+            <TextBlock Text="(24-hour clock)" VerticalAlignment="Bottom" Margin="10,0,0,4" Foreground="Gray"/>
+        </StackPanel>
+
+        <!-- Days -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Days" FontWeight="SemiBold"/>
+            <CheckBox x:Name="AllDaysBox" Content="Every day" Margin="0,6,0,4" Checked="AllDaysBox_Changed" Unchecked="AllDaysBox_Changed"/>
+            <WrapPanel x:Name="DaysPanel">
+                <CheckBox x:Name="MonBox" Content="Mon" Margin="0,0,10,4"/>
+                <CheckBox x:Name="TueBox" Content="Tue" Margin="0,0,10,4"/>
+                <CheckBox x:Name="WedBox" Content="Wed" Margin="0,0,10,4"/>
+                <CheckBox x:Name="ThuBox" Content="Thu" Margin="0,0,10,4"/>
+                <CheckBox x:Name="FriBox" Content="Fri" Margin="0,0,10,4"/>
+                <CheckBox x:Name="SatBox" Content="Sat" Margin="0,0,10,4"/>
+                <CheckBox x:Name="SunBox" Content="Sun" Margin="0,0,10,4"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <!-- Bell pattern -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,10">
+            <TextBlock Text="Bell Pattern" FontWeight="SemiBold"/>
+            <ComboBox x:Name="PatternBox" Margin="0,4,0,0" SelectionChanged="PatternBox_SelectionChanged">
+                <ComboBoxItem Content="Regular Period (single ring)" Tag="RegularPeriod"/>
+                <ComboBoxItem Content="Assembly (long tan-tan-tan)" Tag="Assembly"/>
+                <ComboBoxItem Content="Lunch Break (double ring)" Tag="Lunch"/>
+                <ComboBoxItem Content="Custom" Tag="Custom"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Rings -->
+        <StackPanel Grid.Row="4" Margin="0,0,0,10">
+            <TextBlock Text="Number of Rings" FontWeight="SemiBold"/>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <TextBox x:Name="RingsBox" Width="60" Text="1"/>
+                <TextBlock Text="times, ~0.9s apart" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="Gray"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Sound file -->
+        <StackPanel Grid.Row="5" Margin="0,0,0,10">
+            <TextBlock Text="Sound File (optional)" FontWeight="SemiBold"/>
+            <TextBlock Text="Leave empty to use the built-in bell tone (works offline)." Foreground="Gray" TextWrapping="Wrap" Margin="0,2,0,4"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="SoundPathBox" Width="240" IsReadOnly="True"/>
+                <Button Content="Browse..." Margin="8,0,0,0" Padding="8,2" Click="Browse_Click"/>
+                <Button Content="Clear" Margin="8,0,0,0" Padding="8,2" Click="ClearSound_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="🔔 Preview" Padding="10,4" Click="Preview_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" Width="80" Padding="6" Margin="0,0,8,0" Click="Cancel_Click"/>
+            <Button Content="Save" Width="80" Padding="6" Click="Save_Click" IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
